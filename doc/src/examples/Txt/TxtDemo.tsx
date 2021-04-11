@@ -1,9 +1,10 @@
-import * as React from 'react';
-import {Page} from '../../shared/Page/Page';
-import {PageTitle} from '../../shared/PageTitle/PageTitle';
-import {Demo} from 'mui-extension/lib';
-import {TxtDemoSkeleton} from './TxtDemoSkeleton';
-import {TxtDemoCustom} from './TxtDemoCustom';
+import * as React from 'react'
+import {Page} from '../../shared/Page/Page'
+import {PageTitle} from '../../shared/PageTitle/PageTitle'
+import {TxtDemoSkeleton} from './TxtDemoSkeleton'
+import {TxtDemoCustom} from './TxtDemoCustom'
+import {Demo} from 'mui-extension'
+import preval from 'babel-plugin-preval/macro'
 
 export const TxtDemo = () => {
   return (
@@ -20,5 +21,5 @@ export const TxtDemo = () => {
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./TxtDemoCustom.tsx'), 'utf8')`}
         component={TxtDemoCustom}/>
     </Page>
-  );
-};
+  )
+}

@@ -1,7 +1,7 @@
-import * as React from 'react';
-import {TableCell, TableSortLabel} from '@material-ui/core';
-import {OrderByType} from './TableSort';
-import {TableCellProps} from '@material-ui/core/TableCell';
+import * as React from 'react'
+import {TableCell, TableSortLabel} from '@material-ui/core'
+import {OrderByType} from './TableSort'
+import {TableCellProps} from '@material-ui/core/TableCell'
 
 export interface ITableSortCellProps extends TableCellProps {
   name?: string

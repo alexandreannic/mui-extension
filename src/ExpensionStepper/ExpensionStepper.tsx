@@ -1,9 +1,6 @@
 import * as React from 'react'
-import {ReactChild, ReactElement} from 'react'
-import {createStyles, Theme, withStyles, WithStyles} from '@material-ui/core'
+import {ReactElement} from 'react'
 import {ExpensionStepProps} from './index'
-
-const styles = (t: Theme) => createStyles({})
 
 export interface ExpensionProps {
   readonly position?: number
@@ -20,7 +17,16 @@ interface State {
   reached: number
 }
 
-class ExpensionStepper extends React.Component<ExpensionProps & WithStyles<typeof styles>, State> {
+export class ExpensionStepper extends React.Component<ExpensionProps, State> {
+
+  constructor(props) {
+    super(props)
+    const stepsCount = React.Children.count(this.props.children)
+    this.state = {
+      current: props.position ? Math.min(props.position, stepsCount - 1) : 0,
+      reached: props.free ? stepsCount - 1 : 0,
+    }
+  }
 
   render() {
     const {className, autoScroll, free, onNext, onEnd, children, ...other} = this.props
@@ -46,15 +52,6 @@ class ExpensionStepper extends React.Component<ExpensionProps & WithStyles<typeo
     )
   }
 
-  constructor(props) {
-    super(props)
-    const stepsCount = React.Children.count(this.props.children)
-    this.state = {
-      current: props.position ? Math.min(props.position, stepsCount - 1) : 0,
-      reached: props.free ? stepsCount - 1 : 0,
-    }
-  }
-
   goTo = (i: number) => {
     if (this.state.reached >= i) this.setState({current: i})
   }
@@ -77,5 +74,3 @@ class ExpensionStepper extends React.Component<ExpensionProps & WithStyles<typeo
     }
   }
 }
-
-export default withStyles(styles)(ExpensionStepper) as React.ComponentType<ExpensionProps>

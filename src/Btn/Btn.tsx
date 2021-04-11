@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Button, CircularProgress, Icon, Theme} from '@material-ui/core'
 import classNames from 'classnames'
 import {ButtonProps} from '@material-ui/core/Button'
-import {createStyles, makeStyles} from '@material-ui/styles'
+import {createStyles, makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   progress: {

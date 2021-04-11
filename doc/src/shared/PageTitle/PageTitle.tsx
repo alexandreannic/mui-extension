@@ -1,7 +1,11 @@
 import * as React from 'react'
-import {NavLink} from 'react-router-dom'
+import {ReactNode} from 'react'
 
-export const PageTitle = ({children}) => {
+interface PageTitleProps {
+  children: ReactNode;
+}
+
+export const PageTitle = ({children}: PageTitleProps) => {
   return (
     <h1>
       {children}

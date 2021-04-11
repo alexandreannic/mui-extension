@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useEffect, useState} from 'react'
-import {Btn, withGlobalProgress, GlobalProgressBar, GlobalProgressProvider} from 'mui-extension'
+import {Btn, GlobalProgressBar, GlobalProgressProvider, withGlobalProgress} from 'mui-extension'
 import {FormControl, Input, InputLabel} from '@material-ui/core'
 
 export const GlobalProgressDemoManual = () => {
@@ -14,13 +14,15 @@ export const GlobalProgressDemoManual = () => {
   )
 }
 
-const App = withGlobalProgress(({progressStart, progressNext}) => {
+const App = withGlobalProgress(({progressStart, progressNext}: any) => {
 
   const [stepsCount, setStepsCount] = useState(3)
   const [delay, setDelay] = useState(1000)
-  const timeouts = []
+  const timeouts: any[] = []
 
-  useEffect(() => () => timeouts.map(clearTimeout), [])
+  useEffect(() => () => {
+    timeouts.map(clearTimeout)
+  }, [])
 
   const start = () => {
     timeouts.map(clearTimeout)

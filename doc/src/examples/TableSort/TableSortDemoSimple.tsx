@@ -3,7 +3,12 @@ import {useState} from 'react'
 import {Table, TableBody, TableCell, TableRow} from '@material-ui/core'
 import {TableSort, TableSortCell} from 'mui-extension'
 
-const data = [
+interface User {
+  name: string
+  age: string
+}
+
+const data: User[] = [
   {name: 'Alex', age: '29',},
   {name: 'Roger', age: '99',},
   {name: 'Laurette', age: '22',},
@@ -12,11 +17,11 @@ const data = [
 
 export const TableSortDemoSimple = () => {
 
-  const [sortBy, setSortBy] = useState('name')
-  const [orderBy, setOrderBy] = useState('desc')
+  const [sortBy, setSortBy] = useState<keyof User>('name')
+  const [orderBy, setOrderBy] = useState<'desc' | 'asc'>('desc')
 
-  const handleSort = (sortBy, orderBy) => {
-    setSortBy(sortBy)
+  const handleSort = (sortBy: string, orderBy: 'desc' | 'asc') => {
+    setSortBy(sortBy as keyof User)
     setOrderBy(orderBy)
   }
 

@@ -5,7 +5,7 @@ import {Btn} from '../Btn'
 import {colorError} from '../core/style/color'
 import classNames from 'classnames'
 import {ButtonProps} from '@material-ui/core/Button'
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   root: {
@@ -22,11 +22,12 @@ const useStyles = makeStyles((t: Theme) => createStyles({
     position: 'absolute',
     top: 0,
     right: 0,
-    left: 0,
+    left: 1,
     bottom: 0,
   },
   docUploading: {
     color: t.palette.text.disabled,
+    position: 'relative',
   },
   error: {
     display: 'flex',
@@ -86,7 +87,6 @@ export const BtnUploader = ({document, uploading, msg = defaultMsg, onUpload, on
       return
     }
     const file = files[0]
-    // const {maxUploadFileSize, onUpload, msg} = props
     if (maxUploadFileSize && file.size > maxUploadFileSize * 1024 * 1024) {
       setErrorMessage(msg.invalidSize)
       return
@@ -102,7 +102,7 @@ export const BtnUploader = ({document, uploading, msg = defaultMsg, onUpload, on
     if (uploading) {
       return (
         <Chip className={classNames(classes.doc, classes.docUploading)} label={msg.loading} avatar={
-          <Avatar>
+          <Avatar style={{position: 'initial'}}>
             <CircularProgress size={32} className={classes.doc_progress}/>
             <Icon className={classes.doc_i}>insert_drive_file</Icon>
           </Avatar>

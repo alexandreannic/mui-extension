@@ -1,17 +1,17 @@
-import {Panel, PanelBody} from 'mui-extension/lib';
-import * as React from 'react';
-import {useState} from 'react';
-import {Divider, Icon, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Select, Switch} from '@material-ui/core';
-import {Txt, TxtProps} from './Txt';
+import {Panel, PanelBody} from 'mui-extension'
+import * as React from 'react'
+import {useState} from 'react'
+import {Divider, Icon, List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, MenuItem, Select, Switch} from '@material-ui/core'
+import {Txt, TxtProps} from './Txt'
 
-const sizes = ['default', 'big', 'title', 'small'];
-const colors = ['primary', 'secondary', 'disabled', 'hint', 'default', 'error'];
+const sizes = ['default', 'big', 'title', 'small']
+const colors = ['primary', 'secondary', 'disabled', 'hint', 'default', 'error']
 
-const SugarSelect = ({value, onChange, values}) => (
-  <Select value={value} onChange={e => onChange(e.target.value)} style={{minWidth: 200,}}>
+const SugarSelect = ({value, onChange, values}: {value?: string, onChange: (value: any) => void, values: string[]}) => (
+  <Select value={value} onChange={e => onChange(e.target.value as string)} style={{minWidth: 200,}}>
     {values.map(_ => <MenuItem key={_} value={_}>{_}</MenuItem>)}
   </Select>
-);
+)
 
 const Item = ({icon, label, children}: any) => (
   <ListItem>
@@ -23,18 +23,18 @@ const Item = ({icon, label, children}: any) => (
       {children}
     </ListItemSecondaryAction>
   </ListItem>
-);
+)
 
 export const TxtDemoCustom = () => {
-  const [link, setLink] = useState(false);
-  const [block, setBlock] = useState(true);
-  const [uppercase, setUppercase] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [bold, setBold] = useState(true);
-  const [gutter, setGutter] = useState(false);
-  const [italic, setItalic] = useState(false);
-  const [size, setSize] = useState<TxtProps['size']>('big');
-  const [color, setColor] = useState<TxtProps['color']>('default');
+  const [link, setLink] = useState(false)
+  const [block, setBlock] = useState(true)
+  const [uppercase, setUppercase] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [bold, setBold] = useState(true)
+  const [gutter, setGutter] = useState(false)
+  const [italic, setItalic] = useState(false)
+  const [size, setSize] = useState<TxtProps['size']>('big')
+  const [color, setColor] = useState<TxtProps['color']>('default')
   return (
     <div>
       <List>
@@ -84,5 +84,5 @@ export const TxtDemoCustom = () => {
         </PanelBody>
       </Panel>
     </div>
-  );
-};
+  )
+}

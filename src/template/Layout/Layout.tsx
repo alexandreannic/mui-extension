@@ -3,7 +3,7 @@ import {ReactNode} from 'react'
 import {createStyles, Theme} from '@material-ui/core'
 import {MobileHeader} from './MobileHeader/MobileHeader'
 import classNames from 'classnames'
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/core'
 import {LayoutProvider, useLayoutContext} from './LayoutContext'
 
 export const sidebarWith = 220

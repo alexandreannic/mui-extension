@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactElement} from 'react'
 import {TableHead, TableRow} from '@material-ui/core'
-import TableSortCell, {ITableSortCellProps} from './TableSortCell'
+import {ITableSortCellProps} from './TableSortCell'
 import autobind from 'autobind-decorator'
 
 export type OrderByType = 'asc' | 'desc'

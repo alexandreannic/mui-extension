@@ -1,16 +1,15 @@
 import * as React from 'react'
 import {useState} from 'react'
 import {Btn} from 'mui-extension'
-import {Icon} from '@material-ui/core'
 
 export const BtnDemoButton = () => {
   const [isLoading, setIsLoading] = useState([false, false, false, false])
 
-  const setIsLoadingAtIndex = (i, value) => {
+  const setIsLoadingAtIndex = (i: number, value: boolean) => {
     setIsLoading(pevIsLoading => pevIsLoading.map((v, j) => i === j ? value : v))
   }
 
-  const upload = (i) => () => {
+  const upload = (i: number) => () => {
     setIsLoadingAtIndex(i, true)
     setTimeout(() => setIsLoadingAtIndex(i, false), 1000)
   }
@@ -32,7 +31,7 @@ export const BtnDemoButton = () => {
         Contacts
       </Btn>
       {/*<Btn variant="fab" color="primary" loading={isLoading[3]} onClick={upload(3)}>*/}
-        {/*<Icon>add</Icon>*/}
+      {/*<Icon>add</Icon>*/}
       {/*</Btn>*/}
     </div>
   )

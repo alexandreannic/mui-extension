@@ -1,10 +1,10 @@
-import {makeStyles} from '@material-ui/styles';
-import {Omit, Theme} from '@material-ui/core';
-import classNames from 'classnames';
-import * as React from 'react';
-import {HTMLProps} from 'react';
-import {capitalize} from '@material-ui/core/utils';
-import {Skeleton} from '@material-ui/lab';
+import {makeStyles} from '@material-ui/core'
+import {Omit, Theme} from '@material-ui/core'
+import classNames from 'classnames'
+import * as React from 'react'
+import {HTMLProps} from 'react'
+import {capitalize} from '@material-ui/core/utils'
+import {Skeleton} from '@material-ui/lab'
 
 interface Props extends Omit<HTMLProps<HTMLDivElement>, 'size'> {
   bold?: boolean
@@ -88,7 +88,7 @@ const useStyles = makeStyles((t: Theme) => ({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
   },
-}));
+}))
 
 export const Txt = ({
   skeleton,
@@ -106,7 +106,7 @@ export const Txt = ({
   className,
   ...otherProps
 }: Props) => {
-  const css = useStyles();
+  const css = useStyles()
   const classes = classNames(
     css.root,
     gutterBottom && css.gutterBottom,
@@ -114,11 +114,11 @@ export const Txt = ({
     (() => {
       switch (size) {
         case 'big':
-          return css.big;
+          return css.big
         case 'title':
-          return css.title;
+          return css.title
         case 'small':
-          return css.small;
+          return css.small
       }
     }),
     italic && css.italic,
@@ -129,7 +129,7 @@ export const Txt = ({
     noWrap && css.noWrap,
     color && css['color' + capitalize(color)],
     className,
-  );
+  )
   return (
     <div className={classes} {...otherProps}>
       {skeleton ?
@@ -144,5 +144,5 @@ export const Txt = ({
           children
         )}
     </div>
-  );
-};
+  )
+}

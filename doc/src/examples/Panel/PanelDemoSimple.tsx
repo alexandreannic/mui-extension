@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {useEffect, useState} from 'react'
 import {Btn, Panel, PanelBody, PanelFoot, PanelHead} from 'mui-extension'
-import {Button, Divider, Icon, IconButton} from '@material-ui/core'
-import {makeStyles} from '@material-ui/styles'
+import {Button, Divider, Icon, IconButton, Theme} from '@material-ui/core'
+import {makeStyles} from '@material-ui/core'
 
-let timeout
+let timeout: any;
 
 export const PanelDemoSimple = () => {
 
@@ -54,7 +54,7 @@ export const PanelDemoSimple = () => {
   )
 }
 
-const useStyles = makeStyles(t => ({
+const useStyles = makeStyles((t: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -85,7 +85,13 @@ const useStyles = makeStyles(t => ({
   }
 }))
 
-const Row = (({icon, label, date}) => {
+interface RowProps {
+  icon: string,
+  label: string,
+  date: string,
+}
+
+const Row = (({icon, label, date}: RowProps) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>

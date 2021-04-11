@@ -1,11 +1,11 @@
-import * as React from 'react';
-import {ReactNode, useState} from 'react';
-import {createStyles, Icon, IconButton, Theme} from '@material-ui/core';
-import {colorError, colorInfo, colorSuccess, colorWarning} from '../core/style/color';
-import classNames from 'classnames';
-import {makeStyles} from '@material-ui/styles';
+import * as React from 'react'
+import {ReactNode, useState} from 'react'
+import {createStyles, Icon, IconButton, Theme} from '@material-ui/core'
+import {colorError, colorInfo, colorSuccess, colorWarning} from '../core/style/color'
+import classNames from 'classnames'
+import {makeStyles} from '@material-ui/core'
 
-const height = 52;
+const height = 52
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   root: t.mixins.gutters({

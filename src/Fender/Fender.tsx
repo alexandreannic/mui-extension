@@ -3,12 +3,12 @@ import {ReactNode} from 'react'
 import {CircularProgress, createStyles, Icon, Theme} from '@material-ui/core'
 import classNames from 'classnames'
 import {colorError, colorSuccess, colorWarning} from '../core/style/color'
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/core'
 
 type State = 'loading' | 'error' | 'empty' | 'success' | 'warning';
 
 export interface FenderProps {
-  children: ReactNode,
+  children?: ReactNode,
   type?: State
   icon?: string
   iconSize?: number
@@ -65,13 +65,13 @@ export const Fender = ({children, icon, iconSize = 100, type = 'empty', classNam
       case 'empty':
         return renderIcon('do_not_disturb')
       case 'error':
-        return renderIcon('error_outline');
+        return renderIcon('error_outline')
       case 'success':
-        return renderIcon('check_circle_outline');
+        return renderIcon('check_circle_outline')
       case 'warning':
         return renderIcon('warning')
       case 'loading':
-        return <CircularProgress size={iconSize - 10}/>;
+        return <CircularProgress size={iconSize - 10}/>
     }
   }
 

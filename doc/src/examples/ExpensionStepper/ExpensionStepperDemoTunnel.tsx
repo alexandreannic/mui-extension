@@ -1,11 +1,10 @@
 import * as React from 'react'
 import {useState} from 'react'
 import {Button, FormControl, Switch, TextField, Typography} from '@material-ui/core'
-import {Panel} from 'mui-extension'
-import {ExpensionStep, ExpensionStepper} from 'mui-extension'
+import {ExpensionStep, ExpensionStepper, Panel} from 'mui-extension'
 
 export const ExpensionStepperDemoTunnel = () => {
-  const [msg, setMsg] = useState(undefined)
+  const [msg, setMsg] = useState<string>('')
   const [autoScroll, setAutoScroll] = useState(true)
   return (
     <>
@@ -33,7 +32,7 @@ export const ExpensionStepperDemoTunnel = () => {
   )
 }
 
-const Step1 = (props) => {
+const Step1 = (props: any) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   return (
@@ -59,7 +58,7 @@ const Step1 = (props) => {
   )
 }
 
-const Step2 = (props) => {
+const Step2 = (props: any) => {
   const [birthDate, setBirthDate] = useState('')
   return (
     <>
@@ -104,7 +103,16 @@ const Step2 = (props) => {
   )
 }
 
-const Actions = ({index, isLast, prev, next, canNext, data}) => {
+interface ActionsProps {
+  index: number,
+  isLast: boolean,
+  prev: () => void,
+  next: (data: any) => void,
+  canNext: boolean,
+  data: any,
+}
+
+const Actions = ({index, isLast, prev, next, canNext, data}: ActionsProps) => {
   const onClick = () => next(data)
   return (
     <div style={{marginTop: 24, textAlign: 'right'}}>

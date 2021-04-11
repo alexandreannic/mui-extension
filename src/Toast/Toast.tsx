@@ -1,21 +1,19 @@
 import * as React from 'react'
-import {
-  CircularProgress,
-  createStyles,
-  Icon,
-  IconButton,
-  Snackbar,
-  Theme,
-  WithStyles,
-  withStyles
-} from '@material-ui/core'
+import {ReactNode, useContext, useState} from 'react'
+import {CircularProgress, createStyles, Icon, IconButton, makeStyles, Snackbar, Theme} from '@material-ui/core'
 import {colorInfo, colorSuccess, colorWarning} from '../core/style/color'
-import autobind from 'autobind-decorator'
-import {useContext} from 'react'
 
-const ToastContext = React.createContext({})
+const noop = (_: string) => {}
 
-const styles = (t: Theme) => createStyles({
+const ToastContext = React.createContext<WithToast>({
+  toastError: noop,
+  toastSuccess: noop,
+  toastWarning: noop,
+  toastInfo: noop,
+  toastLoading: noop,
+})
+
+const useStyles = makeStyles((t: Theme) => createStyles({
   iError: {
     color: t.palette.error.main,
   },
@@ -31,15 +29,9 @@ const styles = (t: Theme) => createStyles({
   label: {
     marginLeft: t.spacing(2),
   }
-})
+}))
 
 type ToastType = 'error' | 'loading' | 'warning' | 'success' | 'info' | undefined;
-
-export interface ToastState {
-  type?: ToastType;
-  message?: string;
-  open: boolean;
-}
 
 export interface WithToast {
   toastError: (m: string) => void;
@@ -50,54 +42,23 @@ export interface WithToast {
 }
 
 export interface ToastProviderProps {
+  children: ReactNode
 }
 
-export interface IState extends ToastState,
-  WithToast {
-}
+export const ToastProvider = ({children}: ToastProviderProps) => {
+  const classes = useStyles()
 
-class ToastProvider extends React.Component<ToastProviderProps & WithStyles<typeof styles>, IState> {
+  const [type, setType] = useState<ToastType | undefined>(undefined)
+  const [message, setMessage] = useState<string | undefined>(undefined)
+  const [open, setOpen] = useState(false)
 
-  state = {
-    type: undefined,
-    message: undefined,
-    open: false,
-    toastError: this.popError,
-    toastSuccess: this.popSuccess,
-    toastWarning: this.popWarning,
-    toastInfo: this.popInfo,
-    toastLoading: this.popLoading,
+  const pop = (type: ToastType) => (message: string) => {
+    setOpen(true)
+    setType(type)
+    setMessage(message)
   }
 
-  render() {
-    const {classes} = this.props
-    const {type, open, message} = this.state
-    return (
-      <ToastContext.Provider value={this.state}>
-        {this.props.children}
-        <Snackbar
-          anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-          open={open}
-          autoHideDuration={type === 'error' ? 1000000 : 6000}
-          onClose={this.close}
-          message={
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              {this.renderIcon(type)}
-              <span className={classes.label}>{message}</span>
-            </div>
-          }
-          action={
-            <IconButton onClick={this.close} color="inherit">
-              <Icon>close</Icon>
-            </IconButton>
-          }
-        />
-      </ToastContext.Provider>
-    )
-  }
-
-  private renderIcon(type: ToastType) {
-    const {classes} = this.props
+  const renderIcon = (type: ToastType) => {
     switch (type!) {
       case 'error':
         return <Icon className={classes.iError}>error</Icon>
@@ -114,63 +75,42 @@ class ToastProvider extends React.Component<ToastProviderProps & WithStyles<type
     }
   }
 
-  private pop(type: ToastType, message: string) {
-    this.setState({open: true, type, message})
-  }
+  const close = () => setOpen(false)
 
-  @autobind
-  private popError(message: string) {
-    this.pop('error', message)
-  };
-
-  @autobind
-  private popSuccess(message: string) {
-    this.pop('success', message)
-  }
-
-  @autobind
-  private popWarning(message: string) {
-    this.pop('warning', message)
-  }
-
-  @autobind
-  private popInfo(message: string) {
-    this.pop('info', message)
-  }
-
-  @autobind
-  private popLoading(message: string) {
-    this.pop('loading', message)
-  }
-
-  @autobind
-  private close() {
-    this.setState({open: false})
-  }
+  return (
+    <ToastContext.Provider value={{
+      toastError: pop('error'),
+      toastSuccess: pop('success'),
+      toastWarning: pop('warning'),
+      toastInfo: pop('info'),
+      toastLoading: pop('loading'),
+    }}>
+      {children}
+      <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+        open={open}
+        autoHideDuration={type === 'error' ? 1000000 : 6000}
+        onClose={close}
+        message={
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            {renderIcon(type)}
+            <span className={classes.label}>{message}</span>
+          </div>
+        }
+        action={
+          <IconButton onClick={close} color="inherit">
+            <Icon>close</Icon>
+          </IconButton>
+        }
+      />
+    </ToastContext.Provider>
+  )
 }
 
-export const useToast = (): WithToast => {
-  const {
-    toastError,
-    toastSuccess,
-    toastWarning,
-    toastInfo,
-    toastLoading,
-  } = useContext(ToastContext) as WithToast
-  return {
-    toastError,
-    toastSuccess,
-    toastWarning,
-    toastInfo,
-    toastLoading,
-  }
-}
-
-
-export default withStyles(styles)(ToastProvider) as React.ComponentType<ToastProviderProps>
+export const useToast = () => useContext(ToastContext);
 
 export const withToast = (Component: any) => (props: any) => (
   <ToastContext.Consumer>
-    {(other: any /*WithToast*/) => <Component {...props} {...other}/>}
+    {(other: WithToast) => <Component {...props} {...other}/>}
   </ToastContext.Consumer>
 )

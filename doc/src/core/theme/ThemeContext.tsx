@@ -11,7 +11,7 @@ interface ThemeContextProps {
   setIsDarkTheme: (b: boolean) => void
 }
 
-export const ThemeContextProvider = ({children}) => {
+export const ThemeContextProvider = ({children}: any) => {
 
   const [isDarkTheme, setIsDarkTheme] = useState(storage.load() || false)
   return (

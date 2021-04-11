@@ -30,7 +30,7 @@ export class ConfirmDemoMenu extends React.Component<{}, any> {
     )
   }
 
-  handleClick = event => {
+  handleClick = (event: any) => {
     this.setState({anchorEl: event.currentTarget})
   }
 

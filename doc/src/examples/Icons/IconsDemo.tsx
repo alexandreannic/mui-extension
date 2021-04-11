@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import {IconsDemoSelected} from './IconsDemoSelected'
 import {PageTitle} from '../../shared/PageTitle/PageTitle'
 import {Page} from '../../shared/Page/Page'
-import {makeStyles, useTheme} from '@material-ui/styles'
+import {makeStyles, useTheme} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   head: {
@@ -54,9 +54,8 @@ const icons = {
   'DownloadIcon': <DownloadIcon/>,
 }
 
-
 const IconsDemo = () => {
-  const theme = useTheme()
+  const theme: Theme = useTheme()
   const classes = useStyles()
 
   const colors = {
@@ -68,10 +67,11 @@ const IconsDemo = () => {
     Silver: 'Silver',
   }
 
-  const [color, setColor] = useState<string>('Text')
+  const [color, setColor] = useState<keyof typeof colors>('Text')
   const [size, setSize] = useState<number>(42)
-  const [selected, setSelected] = useState<string>(undefined)
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
+  (Object.keys(icons) as (keyof typeof icons)[]).map((z: keyof typeof icons) => z);
   return (
     <Page>
       <PageTitle>Icons</PageTitle>
@@ -83,7 +83,7 @@ const IconsDemo = () => {
           select
           label="Color"
           value={color}
-          onChange={e => setColor(e.target.value)}
+          onChange={e => setColor(e.target.value as keyof typeof colors)}
           variant="outlined"
         >
           {Object.keys(colors).map(c => <MenuItem key={c} value={c}>{c}</MenuItem>)}
@@ -101,7 +101,7 @@ const IconsDemo = () => {
       </header>
 
       <div className={classes.icons} style={{color: colors[color]}}>
-        {Object.keys(icons).map((name, index) =>
+        {(Object.keys(icons) as (keyof typeof icons)[]).map((name: keyof typeof icons, index) =>
           <div key={name} className={classNames(classes.icon, selected === name && classes.iconSelected)}
                onClick={() => setSelected(name)}>
             {React.cloneElement(icons[name], {key: index, style: {height: size, width: size}})}
@@ -109,11 +109,13 @@ const IconsDemo = () => {
           </div>
         )}
       </div>
+      {selected &&
       <IconsDemoSelected
         name={selected}
         size={size}
         color={colors[color]}
         onClear={() => setSelected(undefined)}/>
+      }
     </Page>
   )
 }

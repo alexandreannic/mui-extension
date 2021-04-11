@@ -1,2 +1,2 @@
-export {default as Autocomplete} from './Autocomplete'
-export {default as AutocompleteItem} from './AutocompleteItem'
+export {Autocomplete, AutocompleteProps} from './Autocomplete'
+export {AutocompleteItem, AutocompleteItemProps} from './AutocompleteItem'
