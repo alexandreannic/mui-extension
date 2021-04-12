@@ -6,8 +6,8 @@ import {Btn, GlobalProgressBar, GlobalProgressProvider, withGlobalProgress} from
 const fetchSomething = (delay: number) => new Promise(resolve => setTimeout(resolve, delay))
 const fetchSomethingRejected = (delay: number) => new Promise((resolve, reject) => setTimeout(() => reject('oops'), delay))
 
-const progressbarContainer = document.createElement('div');
-document.querySelector('body').appendChild(progressbarContainer);
+const progressbarContainer = document.createElement('div')
+document.querySelector('body')!.appendChild(progressbarContainer)
 
 export const GlobalProgressDemoRealLife = () => {
 
@@ -28,7 +28,7 @@ export const GlobalProgressDemoRealLife = () => {
   )
 }
 
-const App = withGlobalProgress(({promisesWithProgress}) => {
+const App = withGlobalProgress(({promisesWithProgress}: any) => {
 
   useEffect(() => fetch(), [])
 

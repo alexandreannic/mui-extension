@@ -1,10 +1,10 @@
-import * as React from 'react';
-import {Page} from '../../shared/Page/Page';
-import {Demo} from 'mui-extension';
-import {ToastDemoExample} from './ToastDemoExample';
-import preval from 'babel-plugin-preval/macro';
-import {Code} from '../../shared/Code/Code';
-import {PageTitle} from '../../shared/PageTitle/PageTitle';
+import * as React from 'react'
+import {Page} from '../../shared/Page/Page'
+import {Demo} from 'mui-extension'
+import {ToastDemoExample} from './ToastDemoExample'
+import preval from 'babel-plugin-preval/macro'
+import {Code} from '../../shared/Code/Code'
+import {PageTitle} from '../../shared/PageTitle/PageTitle'
 
 const ToastDemo = () => {
   return (

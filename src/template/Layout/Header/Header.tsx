@@ -3,7 +3,7 @@ import * as React from 'react'
 import {useLayoutContext} from '../LayoutContext'
 import classNames from 'classnames'
 import {IconBtn} from '../../../IconBtn/IconBtn'
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/core'
 
 export const headerHeight = 52
 

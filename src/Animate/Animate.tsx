@@ -1,8 +1,11 @@
 import * as React from 'react'
-import {createStyles, Theme, WithStyles, withStyles} from '@material-ui/core'
+import {useState} from 'react'
+import {createStyles, Theme} from '@material-ui/core'
 import classNames from 'classnames'
+import {makeStyles} from '@material-ui/core'
+import {useTimeout} from '../core/utils/useTimeout'
 
-const styles = (t: Theme) => createStyles({
+const useStyles = makeStyles((t: Theme) => createStyles({
   root: {
     transition: t.transitions.create('all'),
     opacity: 0,
@@ -13,35 +16,19 @@ const styles = (t: Theme) => createStyles({
     opacity: 1,
     transform: 'translateY(0)',
   },
-})
+}))
 
 export interface AnimateProps {
   delay?: number,
   children: any,
 }
 
-class Animate extends React.Component<AnimateProps & WithStyles<typeof styles>, any> {
+export const Animate = ({children, delay}: AnimateProps) => {
+  const [appeared, setAppeared] = useState<boolean>(false);
+  const classes = useStyles()
+  useTimeout(() => setAppeared(true), delay || 0)
 
-  state = {
-    appeared: false,
-  }
-
-  private timeout: any
-
-  render() {
-    const {children, classes} = this.props
-    return React.cloneElement(children, {
-      className: classNames(classes.root, this.state.appeared && classes.root_appeared)
-    })
-  }
-
-  componentDidMount() {
-    this.timeout = setTimeout(() => this.setState({appeared: true}), this.props.delay || 0)
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeout)
-  }
+  return React.cloneElement(children, {
+    className: classNames(classes.root, appeared && classes.root_appeared)
+  })
 }
-
-export default withStyles(styles)(Animate) as React.ComponentType<AnimateProps>

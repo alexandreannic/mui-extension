@@ -1,13 +1,13 @@
-import * as React from 'react';
-import {Demo} from 'mui-extension';
-import {AlertDemoSimple} from './AlertDemoSimple';
-import preval from 'babel-plugin-preval/macro';
-import {AlertDemoCustom} from './AlertDemoCustom';
-import {AlertDemoWithPanel} from './AlertDemoWithPanel';
-import {PageTitle} from '../../shared/PageTitle/PageTitle';
-import {Page} from '../../shared/Page/Page';
-import {DocTable} from '../../shared/DocTable/DocTable';
-import {Code} from '../../shared/Code/Code';
+import * as React from 'react'
+import {Demo} from 'mui-extension'
+import {AlertDemoSimple} from './AlertDemoSimple'
+import preval from 'babel-plugin-preval/macro'
+import {AlertDemoCustom} from './AlertDemoCustom'
+import {AlertDemoWithPanel} from './AlertDemoWithPanel'
+import {PageTitle} from '../../shared/PageTitle/PageTitle'
+import {Page} from '../../shared/Page/Page'
+import {DocTable} from '../../shared/DocTable/DocTable'
+import {Code} from '../../shared/Code/Code'
 
 const AlertDemo = () => {
   return (
@@ -23,20 +23,17 @@ const AlertDemo = () => {
       <Demo
         reloadable
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./AlertDemoSimple.tsx'), 'utf8')`}
-        component={AlertDemoSimple}>
-      </Demo>
+        component={AlertDemoSimple}/>
 
       <h2>Customized Alert</h2>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./AlertDemoCustom.tsx'), 'utf8')`}
-        component={AlertDemoCustom}>
-      </Demo>
+        component={AlertDemoCustom}/>
 
       <h2>Alert associated with Panel</h2>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./AlertDemoWithPanel.tsx'), 'utf8')`}
-        component={AlertDemoWithPanel}>
-      </Demo>
+        component={AlertDemoWithPanel}/>
 
       <h2>API</h2>
       <DocTable>

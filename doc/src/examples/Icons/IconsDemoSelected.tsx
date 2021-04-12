@@ -1,8 +1,7 @@
 import * as React from 'react'
 import {createStyles, Icon, Slide, Theme} from '@material-ui/core'
-import {Pre} from 'mui-extension'
-import {IconBtn} from 'mui-extension'
-import {makeStyles} from '@material-ui/styles'
+import {IconBtn, Pre} from 'mui-extension'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   root: {
@@ -47,7 +46,7 @@ export const IconsDemoSelected = ({name, size, color, onClear}: IProps) => {
           </IconBtn>
         </header>
         <Pre className={classes.pre} raw={
-          `import {${name}} from 'mui-extension'
+          `import {${name}} from 'lib/index'
 ...
 <${name} style={{height: ${size}, width: ${size}, color: '${color}'}}/>
 ...`

@@ -1,12 +1,13 @@
 import * as React from 'react'
-import {ReactElement} from 'react'
-import {Collapse, createStyles, Icon, Theme, WithStyles, withStyles} from '@material-ui/core'
+import {ReactElement, useEffect, useRef} from 'react'
+import {Collapse, createStyles, Icon, Theme} from '@material-ui/core'
 import {colorSuccess} from '../core/style/color'
 import classNames from 'classnames'
+import {makeStyles} from '@material-ui/core'
 
 const animationDuration = 300
 
-const styles = (t: Theme) => createStyles({
+const useStyles = makeStyles((t: Theme) => createStyles({
   root: {
     '&:not(:first-of-type)': {
       borderTop: `1px solid ${t.palette.divider}`,
@@ -42,7 +43,7 @@ const styles = (t: Theme) => createStyles({
   content: {
     padding: `0 ${t.spacing(3)}px ${t.spacing(3)}px ${t.spacing(3)}px`
   }
-})
+}))
 
 export interface ExpensionStepProps {
   readonly prev?: () => void
@@ -63,60 +64,54 @@ interface Props extends ExpensionStepProps {
   readonly component: ReactElement<any>
 }
 
-class ExpensionStep extends React.Component<Props & WithStyles<typeof styles>, {}> {
+export const ExpensionStep = ({
+  disabled,
+  done,
+  free,
+  isCurrent,
+  index,
+  label,
+  component,
+  goTo,
+  prev,
+  next,
+  isLast,
+  className,
+  autoScroll,
+  ...other
+}: Props) => {
+  let $root: HTMLElement | undefined;
+  const classes = useStyles()
+  const isCurrentRef = useRef<boolean>()
 
-  private $root: HTMLElement | null = null
+  const isClickable = () => !isCurrent && !disabled
 
-  render() {
-    const {
-      disabled,
-      done,
-      free,
-      isCurrent,
-      index,
-      label,
-      component,
-      goTo,
-      classes,
-      prev,
-      next,
-      isLast,
-      className,
-      autoScroll,
-      ...other
-    } = this.props
-    return (
-      <div className={classNames(classes.root, className)} ref={node => this.$root = node} {...other}>
-        <header
-          className={classNames(classes.header, isCurrent && classes.headerCurrent, this.isClickable() && classes.headerClickable)}
-          onClick={() => goTo!(index!)}>
-          {!free && done && !isCurrent && <Icon className={classes.i}>check</Icon>}
-          {!free && <>{index! + 1}. </>}{label}
-        </header>
-        <Collapse in={isCurrent} timeout={animationDuration} className={classes.body}>
-          <div className={classes.content}>
-            {React.cloneElement(component, {prev, next, goTo, free, index, disabled, done, isCurrent, isLast})}
-          </div>
-        </Collapse>
-      </div>
-    )
+  const scrollTop = () => {
+    $root?.scrollIntoView({behavior: 'smooth', block: 'start'})
   }
 
-  componentDidUpdate(prevProps: any) {
-    const {autoScroll, isCurrent} = this.props
-    if (autoScroll && !prevProps.isCurrent && isCurrent)
-      setTimeout(() => this.scrollTop(), animationDuration)
-  }
+  useEffect(() => {
+    isCurrentRef.current = isCurrent
+  }, [isCurrent])
 
-  private isClickable = () => {
-    const {isCurrent, disabled} = this.props
-    return !isCurrent && !disabled
-  }
+  useEffect(() => {
+    if (autoScroll && !isCurrentRef.current && isCurrent)
+      setTimeout(scrollTop, animationDuration)
+  })
 
-  private scrollTop = () => {
-    if (this.$root)
-      this.$root.scrollIntoView({behavior: 'smooth', block: 'start'})
-  }
+  return (
+    <div className={classNames(classes.root, className)} ref={node => $root = node ?? undefined} {...other}>
+      <header
+        className={classNames(classes.header, isCurrent && classes.headerCurrent, isClickable() && classes.headerClickable)}
+        onClick={() => goTo!(index!)}>
+        {!free && done && !isCurrent && <Icon className={classes.i}>check</Icon>}
+        {!free && <>{index! + 1}. </>}{label}
+      </header>
+      <Collapse in={isCurrent} timeout={animationDuration} className={classes.body}>
+        <div className={classes.content}>
+          {React.cloneElement(component, {prev, next, goTo, free, index, disabled, done, isCurrent, isLast})}
+        </div>
+      </Collapse>
+    </div>
+  )
 }
-
-export default withStyles(styles)(ExpensionStep) as React.ComponentType<Props>

@@ -1,23 +1,22 @@
 {
   "name": "mui-extension",
-  "version": "1.7.0",
+  "version": "2.0.0",
   "private": false,
   "description": "Set of UI components based on Material-UI",
   "main": "lib/index.js",
   "peerDependencies": {
-    "react": "16.8.2",
-    "react-dom": "16.8.2",
-    "@material-ui/styles": "4.9.6",
-    "@material-ui/core": "4.9.9",
-    "@material-ui/lab": "4.0.0-alpha.48"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@material-ui/core": "4.11.3",
+    "@material-ui/lab": "4.0.0-alpha.57"
   },
   "dependencies": {
     "autobind-decorator": "^2.1.0",
     "classnames": "^2.2.6",
     "lodash.debounce": "^4.0.8",
     "prismjs": "^1.15.0",
-    "react-router-dom": "^4.3.1",
-    "react-text-mask": "^5.1.0"
+    "react-router-dom": "^5.2.0",
+    "react-text-mask": "^5.4.3"
   },
   "scripts": {
     "test": "jest",
@@ -25,21 +24,20 @@
   },
   "author": "Alexandre Annic <alexandre.annic1@gmail.com>",
   "devDependencies": {
-    "react": "16.8.2",
-    "react-dom": "16.8.2",
-    "@material-ui/lab": "4.0.0-alpha.48",
-    "@material-ui/styles": "4.9.6",
-    "@material-ui/core": "4.9.9",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@material-ui/core": "4.11.3",
+    "@material-ui/lab": "4.0.0-alpha.57",
     "@types/enzyme": "^3.1.15",
-    "@types/react": "^16.7.6",
-    "@types/react-dom": "^16.0.9",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "chai": "^4.2.0",
     "chai-enzyme": "^0.8.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
     "jest": "^23.6.0",
-    "typescript": "^2.9.2"
+    "typescript": "^4.2.4"
   },
   "directories": {
     "lib": "lib"

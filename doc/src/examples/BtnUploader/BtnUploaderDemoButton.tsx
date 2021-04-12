@@ -5,7 +5,7 @@ import {BtnUploader} from 'mui-extension'
 export const BtnUploaderDemoButton = () => {
 
   const [isLoading, setIsLoading] = useState(false)
-  const [document, setDocument] = useState(null)
+  const [document, setDocument] = useState<any>(null)
 
   const onUpload = (f: File) => {
     const document = {name: f.name, permalink: 'http://google.fr'}

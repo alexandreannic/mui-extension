@@ -54,7 +54,7 @@ const AutocompleteDemo = () => {
         </tr>
         <tr>
           <td>onChange</td>
-          <td><Code>(value: string | string[]) => void</Code></td>
+          <td><Code>(value: string | string[]) {'=>'} void</Code></td>
           <td>
             Event emitted when the selected value has been changed by the user.
             It's an array if <Code>multiple</Code> is <Code>true</Code>.

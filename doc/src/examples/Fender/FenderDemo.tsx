@@ -14,16 +14,13 @@ const FenderDemo = () => {
       <Demo
         reloadable
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./FenderDemoLoading.tsx'), 'utf8')`}
-        component={FenderDemoLoading}>
-      </Demo>
+        component={FenderDemoLoading}/>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./FenderDemoSimple.tsx'), 'utf8')`}
-        component={FenderDemoSimple}>
-      </Demo>
+        component={FenderDemoSimple}/>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./FenderDemoCustom.tsx'), 'utf8')`}
-        component={FenderDemoCustom}>
-      </Demo>
+        component={FenderDemoCustom}/>
     </Page>
   )
 }

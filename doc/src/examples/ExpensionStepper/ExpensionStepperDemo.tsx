@@ -1,8 +1,7 @@
 import * as React from 'react'
 import {Page} from '../../shared/Page/Page'
-import {Demo} from 'mui-extension'
+import {Demo, Pre} from 'mui-extension'
 import preval from 'babel-plugin-preval/macro'
-import {Pre} from 'mui-extension'
 import {ExpensionStepperDemoTunnel} from './ExpensionStepperDemoTunnel'
 import {ExpensionStepperDemoAccordion} from './ExpensionStepperDemoAccordion'
 import {Code} from '../../shared/Code/Code'
@@ -36,16 +35,13 @@ const ExpensionStepperDemo = () => {
   done: boolean
   isCurrent: boolean
   isLast: boolean
-}`}>
-
-      </Pre>
+}`}/>
 
       <h2>Examples</h2>
       <h3>Tunnel</h3>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./ExpensionStepperDemoTunnel.tsx'), 'utf8')`}
-        component={ExpensionStepperDemoTunnel}>
-      </Demo>
+        component={ExpensionStepperDemoTunnel}/>
 
       <h3>Accordion</h3>
       <p>
@@ -53,8 +49,7 @@ const ExpensionStepperDemo = () => {
       </p>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./ExpensionStepperDemoAccordion.tsx'), 'utf8')`}
-        component={ExpensionStepperDemoAccordion}>
-      </Demo>
+        component={ExpensionStepperDemoAccordion}/>
 
       <h2>API</h2>
 
@@ -89,12 +84,12 @@ const ExpensionStepperDemo = () => {
         </tr>
         <tr>
           <td>onNext</td>
-          <td><Code>(index: number, data?: any) => void</Code></td>
+          <td><Code>(index: number, data?: any) {'=>'} void</Code></td>
           <td>Event emitted when going to the next <i>step</i></td>
         </tr>
         <tr>
           <td>onEnd</td>
-          <td><Code>(data?: any) => void</Code></td>
+          <td><Code>(data?: any) {'=>'} void</Code></td>
           <td>Event emitted when the tunnel is ended</td>
         </tr>
         <tr>

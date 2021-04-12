@@ -27,7 +27,7 @@ export const AutocompleteDemoSimple = () => {
   return (
     <div style={{textAlign: 'center'}}>
       <Autocomplete onChange={setValue} value={value} searchLabel="Search...">
-          {cities.map(c => <AutocompleteItem key={c} value={c}>{c}</AutocompleteItem>)}
+        {cities.map(c => <AutocompleteItem key={c} value={c}>{c}</AutocompleteItem>)}
       </Autocomplete>
       <br/>
       <br/>

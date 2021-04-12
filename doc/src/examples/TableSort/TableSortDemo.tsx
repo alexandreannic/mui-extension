@@ -45,7 +45,7 @@ const TableSortDemo = () => {
         </tr>
         <tr>
           <td>onSort</td>
-          <td><Code>(sortBy: string, orderBy: 'asc' | 'desc') => void</Code></td>
+          <td><Code>(sortBy: string, orderBy: 'asc' | 'desc') {'=>'} void</Code></td>
           <td>Event emitted when sorting by a column.</td>
         </tr>
         </tbody>

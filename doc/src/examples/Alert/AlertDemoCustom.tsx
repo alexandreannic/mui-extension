@@ -1,5 +1,5 @@
-import * as React from 'react';
-import {Btn, Alert, Panel} from 'mui-extension';
+import * as React from 'react'
+import {Alert, Btn, Panel} from 'mui-extension'
 
 export const AlertDemoCustom = () => {
   return (

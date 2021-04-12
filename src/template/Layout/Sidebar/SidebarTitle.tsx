@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactNode} from 'react'
 import {createStyles, Theme, Typography} from '@material-ui/core'
-import {makeStyles} from '@material-ui/styles'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   root: {
@@ -11,7 +11,7 @@ const useStyles = makeStyles((t: Theme) => createStyles({
     color: t.palette.text.disabled,
     marginBottom: t.spacing(2),
   }
-}));
+}))
 
 export interface SidebarTitleProps {
   children: ReactNode

@@ -7,7 +7,7 @@ export interface InputDateProps extends InputProps {
   format: string;
 }
 
-class InputDate extends React.Component<InputDateProps, {}> {
+export class InputDate extends React.Component<InputDateProps, {}> {
 
   render() {
     return (
@@ -19,5 +19,3 @@ class InputDate extends React.Component<InputDateProps, {}> {
     return <Mask {...props} format={this.props.format}/>
   }
 }
-
-export default InputDate

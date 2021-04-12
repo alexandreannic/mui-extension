@@ -1,8 +1,8 @@
-import {Panel, PanelBody} from 'mui-extension/lib'
 import {Txt} from './Txt'
 import * as React from 'react'
 import {useState} from 'react'
 import {Switch} from '@material-ui/core'
+import {Panel, PanelBody} from 'mui-extension'
 
 export const TxtDemoSkeleton = () => {
   const [isLoading, setIsLoading] = useState(true)

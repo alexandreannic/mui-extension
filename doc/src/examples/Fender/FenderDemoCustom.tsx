@@ -3,7 +3,7 @@ import {Fender} from 'mui-extension'
 
 export const FenderDemoCustom = () => {
   return (
-    <Fender icon="cloud_off" iconSize="150">
+    <Fender icon="cloud_off" iconSize={150}>
       <div style={{textAlign: 'left'}}>
         <div style={{fontSize: '1.4em', lineHeight: 1, marginBottom: 8}}>No internet</div>
         Try

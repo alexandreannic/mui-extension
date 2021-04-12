@@ -1,8 +1,8 @@
-import * as React from 'react';
-import {Fender} from 'mui-extension';
-import {Divider} from '@material-ui/core';
+import * as React from 'react'
+import {Fender} from 'mui-extension'
+import {Divider} from '@material-ui/core'
 
-const marginBottom = {style: {marginBottom: 24}};
+const marginBottom = {style: {marginBottom: 24}}
 
 export const FenderDemoSimple = () => {
   return (

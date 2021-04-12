@@ -20,12 +20,10 @@ const ConfirmDemo = () => {
       <h2>Demo</h2>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./ConfirmDemoButton.tsx'), 'utf8')`}
-        component={ConfirmDemoButton}>
-      </Demo>
+        component={ConfirmDemoButton}/>
       <Demo
         raw={preval`module.exports = require('fs').readFileSync(require.resolve('./ConfirmDemoMenu.tsx'), 'utf8')`}
-        component={ConfirmDemoMenu}>
-      </Demo>
+        component={ConfirmDemoMenu}/>
 
       <h2>API</h2>
       <DocTable>
@@ -69,7 +67,7 @@ const ConfirmDemo = () => {
         </tr>
         <tr>
           <td>onConfirm</td>
-          <td><Code>() => void</Code></td>
+          <td><Code>() {'=>'} void</Code></td>
           <td>Event emitted when the confirm button of the dialog is clicked.</td>
         </tr>
         </tbody>

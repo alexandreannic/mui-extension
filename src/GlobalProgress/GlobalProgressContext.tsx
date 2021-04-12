@@ -1,6 +1,6 @@
 import * as React from 'react'
-import autobind from 'autobind-decorator'
 import {useContext} from 'react'
+import autobind from 'autobind-decorator'
 
 export const GlobalProgressContext = React.createContext({} as IState)
 
@@ -29,8 +29,6 @@ export interface IState extends IProgressState,
 
 class GlobalProgressProvider extends React.Component<GlobalProgressProviderProps, IState> {
 
-  private timeouts: number[] = []
-
   state = {
     currentStep: 0,
     steps: 1,
@@ -41,6 +39,7 @@ class GlobalProgressProvider extends React.Component<GlobalProgressProviderProps
     progressNext: this.next,
     promisesWithProgress: this.promisesWithProgress,
   }
+  private timeouts: number[] = []
 
   render() {
     return (
