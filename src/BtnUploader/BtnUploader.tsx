@@ -4,7 +4,7 @@ import {Avatar, Chip, CircularProgress, createStyles, Icon, Theme} from '@materi
 import {Btn} from '../Btn'
 import {colorError} from '../core/style/color'
 import classNames from 'classnames'
-import {ButtonProps} from '@material-ui/core/Button'
+import {ButtonProps} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles((t: Theme) => createStyles({

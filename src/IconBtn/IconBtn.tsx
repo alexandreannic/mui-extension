@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactNode} from 'react'
 import {CircularProgress, Icon, IconButton} from '@material-ui/core'
-import {IconButtonProps} from '@material-ui/core/IconButton'
+import {IconButtonProps} from '@material-ui/core'
 
 
 export interface IconBtnProps extends IconButtonProps {

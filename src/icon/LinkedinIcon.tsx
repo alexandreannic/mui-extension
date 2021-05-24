@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import * as React from 'react'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import {SvgIcon} from '@material-ui/core'
 
 const LinkedinIcon = ({className, ...props}: any) =>
   <SvgIcon className={className} {...props}>
