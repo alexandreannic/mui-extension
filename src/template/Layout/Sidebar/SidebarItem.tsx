@@ -2,7 +2,7 @@ import * as React from 'react'
 import {HTMLProps, ReactNode} from 'react'
 import {createStyles, Icon, makeStyles, Theme} from '@material-ui/core'
 import classNames from 'classnames'
-import {fade} from '@material-ui/core/styles/colorManipulator'
+import {fade} from '@material-ui/core/styles'
 import {useLayoutContext} from '../LayoutContext'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
