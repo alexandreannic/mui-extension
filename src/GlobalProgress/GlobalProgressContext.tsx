@@ -110,7 +110,7 @@ class GlobalProgressProvider extends React.Component<GlobalProgressProviderProps
   }
 
   private setTimeout(fn: () => void, duration?: number) {
-    this.timeouts.push(setTimeout(fn, duration))
+    this.timeouts.push(window.setTimeout(fn, duration))
   }
 
   private clearTimeouts() {
