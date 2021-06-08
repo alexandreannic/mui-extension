@@ -1,6 +1,6 @@
 {
   "name": "mui-extension",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": false,
   "description": "Set of UI components based on Material-UI",
   "main": "lib/index.js",
