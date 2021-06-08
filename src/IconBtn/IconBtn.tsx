@@ -1,17 +1,17 @@
 import * as React from 'react'
 import {ReactNode} from 'react'
-import {CircularProgress, Icon, IconButton} from '@material-ui/core'
-import {IconButtonProps} from '@material-ui/core'
+import {CircularProgress, Icon, IconButton, IconButtonProps, Tooltip} from '@material-ui/core'
 
 
 export interface IconBtnProps extends IconButtonProps {
   loading?: boolean
   icon?: string
   children: ReactNode
+  tooltip?: string
 }
 
-export const IconBtn = ({icon, loading, children, disabled, ...props}: IconBtnProps) => {
-  return (
+export const IconBtn = ({icon, loading, children, disabled, tooltip, ...props}: IconBtnProps) => {
+  const btn = (
     <IconButton {...props} disabled={disabled || loading}>
       {loading
         ? <CircularProgress size={24}/>
@@ -19,4 +19,9 @@ export const IconBtn = ({icon, loading, children, disabled, ...props}: IconBtnPr
       }
     </IconButton>
   )
+  if (tooltip) {
+    return <Tooltip title={tooltip}>{btn}</Tooltip>
+  } else {
+    return btn
+  }
 }
