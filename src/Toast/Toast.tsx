@@ -43,9 +43,11 @@ export interface WithToast {
 
 export interface ToastProviderProps {
   children: ReactNode
+  vertical?: 'top' | 'bottom';
+  horizontal?: 'left' | 'center' | 'right';
 }
 
-export const ToastProvider = ({children}: ToastProviderProps) => {
+export const ToastProvider = ({children, vertical = 'bottom', horizontal = 'left'}: ToastProviderProps) => {
   const classes = useStyles()
 
   const [type, setType] = useState<ToastType | undefined>(undefined)
@@ -87,7 +89,7 @@ export const ToastProvider = ({children}: ToastProviderProps) => {
     }}>
       {children}
       <Snackbar
-        anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+        anchorOrigin={{vertical, horizontal}}
         open={open}
         autoHideDuration={type === 'error' ? 1000000 : 6000}
         onClose={close}
