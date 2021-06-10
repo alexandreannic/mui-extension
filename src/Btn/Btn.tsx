@@ -49,13 +49,13 @@ export interface BtnProps extends Omit<ButtonProps, 'color'> {
   color?: 'inherit' | 'primary' | 'secondary' | 'default' | 'error'
 }
 
-export const Btn = ({loading, children, disabled, icon, iconAfter, color, ...props}: BtnProps) => {
+export const Btn = ({loading, children, disabled, icon, iconAfter, color, className, ...props}: BtnProps) => {
   const classes = useStyles({})
   return (
     <Button
       {...props}
       color={color === 'error' ? 'default' : color}
-      className={classNames(color === 'error' && (classes['error_' + props.variant]))}
+      className={classNames(className, color === 'error' && (classes['error_' + props.variant]))}
       disabled={disabled || loading}
     >
       <div className={classNames(classes.label, loading && classes.labelHidden)}>
