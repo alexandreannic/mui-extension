@@ -1,9 +1,10 @@
 import * as React from 'react'
-import {ReactNode, useState} from 'react'
+import {CSSProperties, ReactNode} from 'react'
 import {createStyles, Icon, IconButton, makeStyles, Theme} from '@material-ui/core'
 import {colorError, colorInfo, colorSuccess, colorWarning} from '../core/style/color'
 import classNames from 'classnames'
 import {Theme as DefaultTheme} from '@material-ui/core/styles/createMuiTheme'
+import {usePersistentState} from 'react-persistent-state/build'
 
 const height = (dense?: boolean) => dense ? 44 : 52
 
@@ -61,6 +62,8 @@ const useStyles = makeStyles<DefaultTheme, AlertProps>((t: Theme) => createStyle
 }))
 
 interface AlertProps {
+  id?: string
+  style?: CSSProperties
   type: 'info' | 'error' | 'warning' | 'success'
   icon?: string
   deletable?: boolean
@@ -70,9 +73,9 @@ interface AlertProps {
   dense?: boolean
 }
 
-export const Alert = ({type, dense, children, icon, action, deletable, className}: AlertProps) => {
+export const Alert = ({id, style, type, dense, children, icon, action, deletable, className}: AlertProps) => {
   const classes = useStyles({type, dense, children, icon, action, deletable, className})
-  const [isVisible, setIsVisible] = useState<boolean>(true)
+  const [isVisible, setIsVisible] = usePersistentState<boolean>(true, id || 'alert')
 
   const getIconFromType = () => {
     switch (type) {
@@ -90,7 +93,7 @@ export const Alert = ({type, dense, children, icon, action, deletable, className
   }
 
   return (
-    <div className={classNames(classes.root, classes['_' + type], className, !isVisible && classes._hidden)}>
+    <div id={id} className={classNames(classes.root, classes['_' + type], className, !isVisible && classes._hidden)} style={style}>
       <Icon className={classes.i}>{icon ? icon : getIconFromType()}</Icon>
       <div className={classes.body}>
         {children}

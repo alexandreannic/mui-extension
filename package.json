@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "lodash.debounce": "^4.0.8",
     "prismjs": "^1.15.0",
+    "react-persistent-state": "git+https://github.com/alexandreannic/react-persistent-state.git",
     "react-text-mask": "^5.4.3"
   },
   "scripts": {
@@ -23,19 +24,19 @@
   },
   "author": "Alexandre Annic <alexandre.annic1@gmail.com>",
   "devDependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
     "@material-ui/core": "4.11.4",
+    "@material-ui/lab": "4.0.0-alpha.58",
     "@types/enzyme": "^3.1.15",
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
-    "@material-ui/lab": "4.0.0-alpha.58",
     "chai": "^4.2.0",
     "chai-enzyme": "^0.8.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
     "jest": "^23.6.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "typescript": "^4.2.4"
   },
   "directories": {
