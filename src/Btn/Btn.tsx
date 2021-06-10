@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {Button, CircularProgress, Icon, Theme} from '@material-ui/core'
+import {Button, CircularProgress, createStyles, Icon, makeStyles, Theme} from '@material-ui/core'
 import classNames from 'classnames'
 import {ButtonProps} from '@material-ui/core/Button'
-import {createStyles, makeStyles} from '@material-ui/core'
+import {colorError} from '../core/style/color'
 
 const useStyles = makeStyles((t: Theme) => createStyles({
   progress: {
@@ -28,19 +28,29 @@ const useStyles = makeStyles((t: Theme) => createStyles({
   },
   labelHidden: {
     visibility: 'hidden',
-  }
+  },
+  error: {
+    background: colorError,
+    color: 'white',
+  },
 }))
 
-export interface BtnProps extends ButtonProps {
+export interface BtnProps extends Omit<ButtonProps, 'color'> {
   loading?: boolean
   icon?: string
   iconAfter?: string
+  color?: 'inherit' | 'primary' | 'secondary' | 'default' | 'error'
 }
 
-export const Btn = ({loading, children, disabled, icon, iconAfter, ...props}: BtnProps) => {
+export const Btn = ({loading, children, disabled, icon, iconAfter, color, ...props}: BtnProps) => {
   const classes = useStyles({})
   return (
-    <Button {...props} disabled={disabled || loading}>
+    <Button
+      {...props}
+      color={color === 'error' ? 'default' : color}
+      className={classNames(color === 'error' && classes.error)}
+      disabled={disabled || loading}
+    >
       <div className={classNames(classes.label, loading && classes.labelHidden)}>
         {icon && <Icon className={classes.icon}>{icon}</Icon>}
         {children}

@@ -1,5 +1,5 @@
 export const
   colorSuccess = '#00c616',
-  colorError = 'red',
+  colorError = '#ea1000',
   colorWarning = '#FF8000',
   colorInfo = '#0288d1'
