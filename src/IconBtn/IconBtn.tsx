@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {ReactNode} from 'react'
-import {CircularProgress, Icon, IconButton, IconButtonProps, Tooltip} from '@material-ui/core'
+import {forwardRef, ReactNode} from 'react'
+import {CircularProgress, Icon, IconButton, IconButtonProps} from '@material-ui/core'
 
 
 export interface IconBtnProps extends IconButtonProps {
@@ -10,18 +10,13 @@ export interface IconBtnProps extends IconButtonProps {
   tooltip?: string
 }
 
-export const IconBtn = ({icon, loading, children, disabled, tooltip, ...props}: IconBtnProps) => {
-  const btn = (
-    <IconButton {...props} disabled={disabled || loading}>
+export const IconBtn = forwardRef(({icon, loading, children, disabled, ...props}: IconBtnProps, ref: any) => {
+  return (
+    <IconButton {...props} disabled={disabled || loading} ref={ref}>
       {loading
         ? <CircularProgress size={24}/>
         : <>{icon ? <Icon>{icon}</Icon> : children}</>
       }
     </IconButton>
   )
-  if (tooltip) {
-    return <Tooltip title={tooltip}>{btn}</Tooltip>
-  } else {
-    return btn
-  }
-}
+})
