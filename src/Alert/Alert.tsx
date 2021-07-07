@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {CSSProperties, ReactNode} from 'react'
+import {CSSProperties, ReactNode, useState} from 'react'
 import {createStyles, Icon, IconButton, makeStyles, Theme} from '@material-ui/core'
 import {colorError, colorInfo, colorSuccess, colorWarning} from '../core/style/color'
 import classNames from 'classnames'
@@ -54,6 +54,9 @@ const useStyles = makeStyles<DefaultTheme, AlertProps>((t: Theme) => createStyle
     opacity: '0 !important',
     margin: '0 !important',
   },
+  _gutterBottom: {
+    marginBottom: t.spacing(1),
+  },
   action: {
     textAlign: 'right',
     margin: `${t.spacing(1)} ${t.spacing(1 / 2)} ${t.spacing(1 / 2)} 0`,
@@ -67,15 +70,18 @@ interface AlertProps {
   type: 'info' | 'error' | 'warning' | 'success'
   icon?: string
   deletable?: boolean
+  persistentDelete?: boolean
   action?: ReactNode
   className?: string
   children: ReactNode
   dense?: boolean
+  gutterBottom?: boolean
 }
 
-export const Alert = ({id, style, type, dense, children, icon, action, deletable, className}: AlertProps) => {
-  const classes = useStyles({type, dense, children, icon, action, deletable, className})
-  const [isVisible, setIsVisible] = usePersistentState<boolean>(true, id || 'alert')
+export const Alert = ({id, style, type, dense, children, icon, action, deletable, persistentDelete, className, gutterBottom}: AlertProps) => {
+  const classes = useStyles({type, dense, children, icon, action, deletable, persistentDelete, className})
+  const [isPersistentVisible, setPersistentIsVisible] = usePersistentState<boolean>(true, id || 'alert')
+  const [isVisible, setIsVisible] = useState<boolean>(true)
 
   const getIconFromType = () => {
     switch (type) {
@@ -93,7 +99,9 @@ export const Alert = ({id, style, type, dense, children, icon, action, deletable
   }
 
   return (
-    <div id={id} className={classNames(classes.root, classes['_' + type], className, !isVisible && classes._hidden)} style={style}>
+    <div id={id}
+         className={classNames(classes.root, classes['_' + type], className, (!isVisible || (persistentDelete && !isPersistentVisible)) && classes._hidden, gutterBottom && classes._gutterBottom)}
+         style={style}>
       <Icon className={classes.i}>{icon ? icon : getIconFromType()}</Icon>
       <div className={classes.body}>
         {children}
@@ -101,7 +109,11 @@ export const Alert = ({id, style, type, dense, children, icon, action, deletable
       <div className={classes.action}>
         {action}
         {deletable &&
-        <IconButton onClick={() => setIsVisible(false)}>
+        <IconButton onClick={() => {
+          setIsVisible(false)
+          if (persistentDelete)
+            setPersistentIsVisible(false)
+        }}>
           <Icon>clear</Icon>
         </IconButton>
         }
