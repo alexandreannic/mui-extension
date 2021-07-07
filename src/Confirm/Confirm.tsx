@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {ReactElement, useState} from 'react'
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core'
+import {Button, createStyles, Dialog, DialogActions, DialogContent, DialogTitle, LinearProgress, makeStyles, Theme} from '@material-ui/core'
 import {DialogProps} from '@material-ui/core/Dialog/Dialog'
 
 export interface ConfirmProps extends Omit<DialogProps, 'children' | 'onClick' | 'open'> {
@@ -11,12 +11,35 @@ export interface ConfirmProps extends Omit<DialogProps, 'children' | 'onClick' |
   content?: any
   children: ReactElement<any>
   onConfirm?: (close: () => void) => void
+  confirmDisabled?: boolean
   onClick?: (event: any) => void
+  loading?: boolean
 }
 
-export const Confirm = ({children, title, content, confirmLabel, cancelLabel, onConfirm, onClick, ...props}: ConfirmProps) => {
+const useStyles = makeStyles((t: Theme) => createStyles({
+  progress: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+  }
+}))
+
+export const Confirm = ({
+  children,
+  title,
+  content,
+  confirmLabel,
+  cancelLabel,
+  onConfirm,
+  onClick,
+  confirmDisabled,
+  loading,
+  ...props
+}: ConfirmProps) => {
 
   const [open, setOpen] = useState<boolean>(false)
+  const css = useStyles()
 
   const confirm = () => {
     if (onConfirm) onConfirm(() => setOpen(false))
@@ -31,6 +54,7 @@ export const Confirm = ({children, title, content, confirmLabel, cancelLabel, on
         }
       })}
       <Dialog open={open} {...props}>
+        {loading && <LinearProgress className={css.progress}/>}
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>{content}</DialogContent>
         <DialogActions>
@@ -38,7 +62,7 @@ export const Confirm = ({children, title, content, confirmLabel, cancelLabel, on
             {cancelLabel || 'Cancel'}
           </Button>
           {onConfirm && (
-            <Button color="primary" onClick={confirm}>
+            <Button color="primary" onClick={confirm} disabled={confirmDisabled}>
               {confirmLabel || 'Confirm'}
             </Button>
           )}
