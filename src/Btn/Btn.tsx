@@ -17,8 +17,8 @@ const useStyles = makeStyles((t: Theme) => createStyles({
     alignItems: 'center',
   },
   icon: {
-    height: '16px !important',
-    lineHeight: '16px !important',
+    height: '22px !important',
+    lineHeight: '22px !important',
     fontSize: '22px !important',
     marginRight: t.spacing(1)
   },
@@ -39,6 +39,10 @@ const useStyles = makeStyles((t: Theme) => createStyles({
   error_contained: {
     background: colorError,
     color: 'white',
+
+    '&:hover': {
+      background: fade(colorError, .8),
+    }
   },
 }))
 
