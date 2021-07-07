@@ -120,7 +120,7 @@ export const Txt = ({
         case 'small':
           return css.small
       }
-    }),
+    })(),
     italic && css.italic,
     block && css.block,
     link && css.link,
