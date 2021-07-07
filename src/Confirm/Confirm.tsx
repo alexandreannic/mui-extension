@@ -1,25 +1,25 @@
 import * as React from 'react'
 import {ReactElement, useState} from 'react'
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core'
+import {DialogProps} from '@material-ui/core/Dialog/Dialog'
 
-export interface ConfirmProps {
+export interface ConfirmProps extends Omit<DialogProps, 'children' | 'onClick' | 'open'> {
   disabled?: boolean
   title?: string
   confirmLabel?: string
   cancelLabel?: string
   content?: any
   children: ReactElement<any>
-  onConfirm?: () => void
+  onConfirm?: (close: () => void) => void
   onClick?: (event: any) => void
 }
 
-export const Confirm = ({children, title, content, confirmLabel, cancelLabel, onConfirm, onClick}: ConfirmProps) => {
+export const Confirm = ({children, title, content, confirmLabel, cancelLabel, onConfirm, onClick, ...props}: ConfirmProps) => {
 
   const [open, setOpen] = useState<boolean>(false)
 
   const confirm = () => {
-    if (onConfirm) onConfirm()
-    setOpen(false)
+    if (onConfirm) onConfirm(() => setOpen(false))
   }
 
   return (
@@ -30,7 +30,7 @@ export const Confirm = ({children, title, content, confirmLabel, cancelLabel, on
           setOpen(true)
         }
       })}
-      <Dialog open={open}>
+      <Dialog open={open} {...props}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>{content}</DialogContent>
         <DialogActions>
